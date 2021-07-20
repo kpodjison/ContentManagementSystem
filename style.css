@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&family=Roboto&family=Rubik&display=swap");
+/*typography style*/
+.font-raleway {
+  font-family: "Raleway", cursive;
+}
+
+.font-rubik {
+  font-family: "Rubik", cursive;
+}
+
+.font-roboto {
+  font-family: "Roboto", cursivve;
+}
+
+.f-s-12 {
+  font-size: 12px;
+}
+
+.f-s-14 {
+  font-size: 14px;
+}
+
+.f-s-24 {
+  font-size: 24px;
+}
+
+.f-s-28 {
+  font-size: 14px;
+}
+
+.f-s-r1 {
+  font-size: 1rem;
+}
+
+.f-s-r2 {
+  font-size: 2rem;
+}
+
+.f-s-r3 {
+  font-size: 3rem;
+}
+
+.f-s-r4 {
+  font-size: 4rem;
+}
+
+#header .navbar-nav .nav-link {
+  color: #fff;
+}
+#header .navbar-nav .nav-link:hover {
+  background: yellow;
+  color: #000;
+}
+
+/*# sourceMappingURL=style.css.map */

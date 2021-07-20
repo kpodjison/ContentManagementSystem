@@ -1,0 +1,12 @@
+#header{
+    .navbar-nav{
+        .nav-link{
+            color: $color-primary;
+
+        }
+        .nav-link:hover{
+            background: yellow;
+            color:#000;
+        }
+    }
+}
