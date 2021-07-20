@@ -7,17 +7,22 @@
     {
         $post_id = $_GET['id'];
         $singlePost = $post->getSinglePost($post_id);
+        if(empty($singlePost))
+        {
+            $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
+             redirect_to('index.php'); 
+        }
     }
     
     if(!isset($_GET['id']) || empty($_GET['id']))
     {
-        $_SESSION['PostErrorMsg'] = "Opps Page Not Found!"; 
+        $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 
         redirect_to('index.php'); 
     }
     
 
 ?>
-<
+
     <div class="container mb-4">
         <div class="row mt-4">
             <div class="col-sm-8">
