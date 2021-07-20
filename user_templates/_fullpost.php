@@ -8,6 +8,13 @@
         $post_id = $_GET['id'];
         $singlePost = $post->getSinglePost($post_id);
     }
+    
+    if(!isset($_GET['id']) || empty($_GET['id']))
+    {
+        $_SESSION['PostErrorMsg'] = "Opps Page Not Found!"; 
+        redirect_to('index.php'); 
+    }
+    
 
 ?>
 <

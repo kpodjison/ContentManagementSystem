@@ -32,6 +32,22 @@
         }
     }
 
+    //error
+    function PostErrorMsg()
+    {
+        if(isset($_SESSION['PostErrorMsg']))
+        {
+            $status = '<div class="alert alert-danger ">'
+            .htmlentities($_SESSION["PostErrorMsg"]).
+            '</div>';
+
+                          //make this session null after using it
+                          $_SESSION["PostErrorMsg"]  = null;
+                          return $status;
+        }
+    }
+
+    
 
 
 ?>

@@ -10,7 +10,9 @@
             <div class="col-sm-8">
                 <h1>The Complete Responsive CMS Blog</h1>
                 <h1 class="lead">By Jeevista.</h1>
-
+                <?php
+                    echo PostErrorMsg();
+                ?>
                 <?php
                     foreach($allPosts as $item):
 
