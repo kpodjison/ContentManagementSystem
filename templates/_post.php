@@ -1,6 +1,21 @@
-
-<!-- style="min-height:622px;" -->
-   
+<?php
+    /* check if session exist for successfully editing a post
+     and display a success message.*/
+        function EditSuccessMsg()
+        {
+                if(isset($_SESSION["EditSuccessMsg"] ))
+                {
+                    $status = '<div class="alert alert-success">'
+                                .htmlentities($_SESSION["EditSuccessMsg"]).
+                                '</div>';    
+                                //make this session null after using it
+                                $_SESSION["EditSuccessMsg"]  = null;
+                                return $status;
+                }    
+        }
+        
+?>
+<!-- style="min-height:622px;" -->   
     <section class="bg-dark text-white py-3">
         <div class="container bg-dark text-white">
             <div class="row">
@@ -37,8 +52,12 @@
 
     </section>
      <!-- start of main content  -->
-
+    
      <section class="container py-2 mb-4">
+            <?php
+               echo EditSuccessMsg();               
+            ?>
+           
          <div class="row">
              <div class="col-lg-12">
                  <table class="table table-responsive table-bordered table-striped table-hover">
@@ -61,7 +80,6 @@
                                 foreach($allPosts as  $item ):
                                     $counter++;
                              ?>
-
                         <tr>                            
 
                              <td><?php echo $counter;?>  </td>
@@ -74,13 +92,13 @@
                              <td>
                                     <div class="btn-group" role="group">
 
-                                        <a href="" class="m-1"><span class="btn btn-warning">Edit</span> </a>
-                                        <a href="" class="m-1"><span class="btn btn-danger">Delete</span> </a>
+                                        <a href="editpost.php?id=<?php echo $item['id'] ?>" class="m-1"><span class="btn btn-warning">Edit</span> </a>
+                                        <a href="deletepost.php?id=<?php echo $item['id'] ?>"class="m-1"><span class="btn btn-danger">Delete</span> </a>
                                     </div>
                                  
                             </td>
                              <td>
-                                <a href="" class="m-1"><span class="btn btn-primary">Live Preview</span> </a>
+                                <a href="../fullpost.php?id=<?php echo $item['id'] ?>" class="m-1" target="_blank"><span class="btn btn-primary">Live Preview</span> </a>
                              </td>
                         </tr>
                              <?php

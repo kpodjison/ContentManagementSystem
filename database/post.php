@@ -23,7 +23,7 @@
                     $post_title = $this->db->mysqli->real_escape_string($_POST['postTitle']);
                     $category = $this->db->mysqli->real_escape_string($_POST['category']);
                     $image = $_FILES['image']['name'];
-                    $ImgTargetDir  = "assets/uploads/".basename($_FILES['image']['name']);
+                    $ImgTargetDir  = "../assets/uploads/".basename($_FILES['image']['name']);
                     $post_desc =  $this->db->mysqli->real_escape_string($_POST['post_desc']);
                     $author = "jeevista";
 
@@ -35,6 +35,39 @@
                         //move file into uploads folder
                         move_uploaded_file($_FILES['image']['tmp_name'], $ImgTargetDir);                        
                         $_SESSION["SuccessMsg"] = "Post added successfully!";
+
+                    }
+
+                }
+            }
+            
+        }
+        //edit post function 
+        public function editPost()
+        {
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                if(isset($_POST['edit_post']))
+                {
+                    $post_id = $this->db->mysqli->real_escape_string($_POST['edit_post_id']);
+                    $post_title = $this->db->mysqli->real_escape_string($_POST['postTitle']);
+                    $category = $this->db->mysqli->real_escape_string($_POST['category']);
+                    $image = $_FILES['image']['name'];
+                    $ImgTargetDir  = "../assets/uploads/".basename($_FILES['image']['name']);
+                    $post_desc =  $this->db->mysqli->real_escape_string($_POST['post_desc']);
+                    $author = "jeevista";
+
+                    //query to update table
+                    $sql = "UPDATE post SET title='$post_title',category='$category',post_img='$image',post_desc='$post_desc' WHERE id='$post_id' ";
+
+                    if($this->db->conn->query($sql) === TRUE)
+                    {
+                        
+                        //move file into uploads folder
+                        move_uploaded_file($_FILES['image']['tmp_name'], $ImgTargetDir);                        
+                        $_SESSION['EditSuccessMsg'] = "Post {$post_id}: Edited Successfully!";
+                        header("Location:post.php");
+                          
 
                     }
 

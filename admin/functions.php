@@ -3,7 +3,7 @@
     // require('database/DBController.php');
     require('../database/DBController.php');
     require('../database/post.php');
-    require('session.php');
+    require('../admin/session.php');
 
     // function to redirect user to a specific page
      function redirect_to($page)

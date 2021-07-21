@@ -5,8 +5,8 @@
     }
     if(isset($_GET['id']))
     {
-        $post_id = $_GET['id'];
-        $singlePost = $post->getSinglePost($post_id);
+        $searchQueryParam = $_GET['id'];
+        $singlePost = $post->getSinglePost( $searchQueryParam);
         if(empty($singlePost))
         {
             $_SESSION['PostErrorMsg'] = "Opps Page Not Found! Browse existing post."; 

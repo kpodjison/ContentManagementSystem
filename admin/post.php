@@ -5,7 +5,6 @@ include('header.php');
 ?>
 
 <?php
-
     // include basic.php ile 
     include('../templates/_post.php');
 ?>
