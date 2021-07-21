@@ -56,16 +56,26 @@
                     $ImgTargetDir  = "../assets/uploads/".basename($_FILES['image']['name']);
                     $post_desc =  $this->db->mysqli->real_escape_string($_POST['post_desc']);
                     $author = "jeevista";
+                    
+                    //variable to hold update query
+                    $sql = "";
 
-                    //query to update table
-                    $sql = "UPDATE post SET title='$post_title',category='$category',post_img='$image',post_desc='$post_desc' WHERE id='$post_id' ";
+                    /*if post image is not changed use default image else use new image selected */
+                    if(empty($image)){
+                        $sql = "UPDATE post SET title='$post_title',category='$category',post_desc='$post_desc' WHERE id='$post_id' ";
+                    }
+                    else
+                    {
+                        $sql = "UPDATE post SET title='$post_title',category='$category',post_img='$image',post_desc='$post_desc' WHERE id='$post_id' ";
+                    }
 
+                    //check if  update was successfull
                     if($this->db->conn->query($sql) === TRUE)
                     {
                         
                         //move file into uploads folder
                         move_uploaded_file($_FILES['image']['tmp_name'], $ImgTargetDir);                        
-                        $_SESSION['EditSuccessMsg'] = "Post {$post_id}: Edited Successfully!";
+                        $_SESSION['EditSuccessMsg'] = "Post {$post_id}: Updated Successfully!";
                         header("Location:post.php");
                           
 
