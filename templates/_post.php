@@ -13,6 +13,24 @@
                                 return $status;
                 }    
         }
+
+        /* check if session exist for successfully deleting a post
+     and display a success message.*/
+     function DeleteSuccessMsg()
+     {    
+            if(isset($_SESSION['DeleteSuccessMsg']))
+            {
+                $status = '<div class="alert alert-success">'.
+                htmlentities($_SESSION['DeleteSuccessMsg']).
+                '</div>';
+
+                //make this session null after using it
+                $_SESSION['DeleteSuccessMsg'] =  null;
+                return $status;
+
+            }
+    }
+
         
 ?>
 <!-- style="min-height:622px;" -->   
@@ -56,6 +74,7 @@
      <section class="container py-2 mb-4">
             <?php
                echo EditSuccessMsg();               
+               echo DeleteSuccessMsg();               
             ?>
            
          <div class="row">

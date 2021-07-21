@@ -86,6 +86,31 @@
             
         }
 
+        // delete post function 
+        public function deletePost()
+        {
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+            
+                if(isset($_POST['delete_post']))
+                {
+                    $post_id = $_POST['delete_post_id'];
+                    $image = $_POST['delete_post_img'];
+                    $Target_Path_To_Delete_Img = "../assets/uploads/$image";
+                    $sql = "DELETE FROM post WHERE id = '$post_id' ";
+
+                    if($this->db->conn->query($sql) === TRUE)
+                    {
+                        // delete image corresponding to this addPost 
+                        unlink($Target_Path_To_Delete_Img);
+                        $_SESSION['DeleteSuccessMsg'] = "Post: {$post_id} Deleted Successfully!";
+                        header("Location:post.php");
+                    }
+
+                }
+            }
+        }
+
         //get all post function
         /*This function gets all post: 
             1. by default it returns all post (thus when called with an empty string as argument)
