@@ -4,15 +4,17 @@
     // success
     function SuccessMsg()
     {
+           
             if(isset($_SESSION["SuccessMsg"] ))
             {
                 $status = '<div class="alert alert-success">'
                             .htmlentities($_SESSION["SuccessMsg"]).
+                            htmlentities($_SESSION["RedirectTo"]).
                             '</div>';
 
-                            //make this session null after using it
-                            $_SESSION["SuccessMsg"]  = null;
-                            return $status;
+                //make this session null after using it
+                $_SESSION["SuccessMsg"]  = null;
+                return $status;
             }
 
     }
@@ -26,9 +28,9 @@
                         .htmlentities($_SESSION["ErrorMsg"]).
                         '</div>';
 
-                          //make this session null after using it
-                          $_SESSION["ErrorMsg"]  = null;
-                          return $status;
+            //make this session null after using it
+            $_SESSION["ErrorMsg"]  = null;
+            return $status;
         }
     }
 
@@ -41,13 +43,11 @@
             .htmlentities($_SESSION["PostErrorMsg"]).
             '</div>';
 
-                          //make this session null after using it
-                          $_SESSION["PostErrorMsg"]  = null;
-                          return $status;
+            //make this session null after using it
+            $_SESSION["PostErrorMsg"]  = null;
+            return $status;
         }
-    }
-
-    
+    } 
 
 
 ?>

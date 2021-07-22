@@ -19,6 +19,7 @@
     $post = new Post($db);
     $allCategories = $post->getAllCategories();
     $allPosts = $post->getAllPost("");
+    
     // print_r($allPosts);
     // print_r($allCategories);
     

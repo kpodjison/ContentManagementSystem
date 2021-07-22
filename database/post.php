@@ -178,6 +178,29 @@
         }
 
 
+        // add comment function 
+        public function addComment(){
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+                if(isset($_POST['add_comment']))
+                {
+
+                    $post_id = $this->db->mysqli->real_escape_string($_POST['post_id']);
+                    $name = $this->db->mysqli->real_escape_string($_POST['commenter_name']);
+                    $email = $this->db->mysqli->real_escape_string($_POST['commenter_email']);
+                    $comment= $this->db->mysqli->real_escape_string($_POST['commenter_comments']);
+                    $sql = "INSERT INTO comments (commenter_name,commenter_email,comment,approved_by,status,post_id) VALUES ('$name','$email','$comment','pending','OFF','$post_id')";
+
+                    if($this->db->conn->query($sql) === TRUE)
+                    {                       
+                        $_SESSION["SuccessMsg"] = "Comment submitted successfully!";                    
+                    }
+                    else
+                    $_SESSION["ErrorMsg"] = "Failed to submit comment!!";
+                }
+            }
+
+        }
         // add category function 
         public function addCategory(){
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
