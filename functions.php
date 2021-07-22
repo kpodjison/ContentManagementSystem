@@ -17,9 +17,16 @@
 
     // post object 
     $post = new Post($db);
+
+    //all categories
     $allCategories = $post->getAllCategories();
+    // all posts 
     $allPosts = $post->getAllPost("");
+
     
+    
+
+
     // print_r($allPosts);
     // print_r($allCategories);
     

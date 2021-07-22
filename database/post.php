@@ -201,6 +201,20 @@
             }
 
         }
+        
+        // get comments corresponding to a post 
+        public function getPostComments($id){
+            $sql = "SELECT * FROM comments WHERE post_id='{$id}' AND status ='ON' ";
+            $results = $this->db->conn->query($sql);
+            $resultsArray = array();
+
+            while($item = mysqli_fetch_assoc($results))
+            {
+                $resultsArray[] = $item;
+            }
+            return $resultsArray;
+        }
+
         // add category function 
         public function addCategory(){
             if($_SERVER['REQUEST_METHOD'] === 'POST'){

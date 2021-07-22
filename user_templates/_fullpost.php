@@ -62,9 +62,8 @@
                         <img src="assets/uploads/<?php echo htmlentities($item['post_img']) ?>" alt="post image" class="card-img-top img-responsive" style="max-height:450px;">
                         <h4 class="card-title mt-1"><?php echo htmlentities($item['title']) ?></h4>
                         <div class="d-flex me-auto flex-row justify-content-between">
-                        <small class="text-muted">Written By: <?php echo htmlentities($item['author']) ?> On <?php echo ($item['date_time']) ?></small>
-                        <small class="badge bg-secondary p-1"> <span>Comments 20</span> </small>
-
+                            <small class="text-muted">Written By: <?php echo htmlentities($item['author']) ?> On <?php echo ($item['date_time']) ?></small>
+                            <small class="badge bg-secondary p-1"> <span>Comments 20</span> </small>
                         </div>
                         <hr>
                         <p class="card-text"><?php echo $item['post_desc'];  ?></p>
@@ -75,6 +74,34 @@
                 <?php
                     endforeach;
                 ?>
+                <!-- start of fetching existing comments  -->
+                    <?php
+                        $allComments = $post->getPostComments($post_id);
+                        // print_r($allComments);
+                        
+                        foreach($allComments as $comment ):
+                    ?>
+                    <div class="media mb-2 bg-dark text-white p-1" >
+                        <img src="./assets/user2.png" alt="User-img" width="64px" height="64px" class="align-self-start me-2">
+                        <div class="media-body">
+                            <div class="d-flex me-auto flex-row justify-content-between mt-0 ">                            
+                                <h6 class="lead"><?php echo $comment['commenter_name'] ?></h6>
+                                <p class="small"><?php  echo $comment['date_time'] ?></p>
+                            </div>
+                            <p><?php echo $comment['comment'] ?></p>
+                        </div>
+
+                    </div>
+                    <hr>
+
+                    <?php
+                        endforeach;
+                    ?>
+
+
+                        
+                <!-- end of fetching existing comments  -->
+
                 <!-- start of comment  -->
                 <div class="">
                     <form action="<?php  echo htmlspecialchars($_SERVER['PHP_SELF']).'?id='.$post_id; ?>" method="post">
