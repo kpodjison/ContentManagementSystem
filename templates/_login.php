@@ -2,6 +2,9 @@
     require('../admin/functions.php');
 ?>
 <?php
+    if(isset($_SESSION['UserId'])){
+        header('Location:../admin/dashboard.php');
+    }
     if(isset($_POST['admin_login']))
     {
 
