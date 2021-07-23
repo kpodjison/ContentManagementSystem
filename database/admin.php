@@ -60,16 +60,18 @@
                         $_SESSION['UserName']  = $item['username'];
                         $_SESSION['AdminName']  = $item['a_name'];
                         $_SESSION['SuccessMsg']  = "Welcome ".$_SESSION['UserName']."!";
-                        header('Location:../admin/dashboard.php');
+                        if(isset($_SESSION['UrlTracker'])){
+                            header('Location:'.$_SESSION['UrlTracker']);
+                        }else
+                        {
+                           header('Location:../admin/dashboard.php'); 
+                        }                       
+                        
                     }
                     else
                     {
                         $_SESSION['ErrorMsg']  = "Incorrect Username or Password!!";
-                       
-
                     }
-
-
                 }
             }
         }
