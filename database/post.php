@@ -25,7 +25,7 @@
                     $image = $_FILES['image']['name'];
                     $ImgTargetDir  = "../assets/uploads/".basename($_FILES['image']['name']);
                     $post_desc =  $this->db->mysqli->real_escape_string($_POST['post_desc']);
-                    $author = "jeevista";
+                    $author =$_SESSION['UserName'];
 
                     $sql = "INSERT INTO post(title,category,author,post_img,post_desc) VALUES ('$post_title', '$category','$author','$image','$post_desc')";
 
@@ -55,7 +55,7 @@
                     $image = $_FILES['image']['name'];
                     $ImgTargetDir  = "../assets/uploads/".basename($_FILES['image']['name']);
                     $post_desc =  $this->db->mysqli->real_escape_string($_POST['post_desc']);
-                    $author = "jeevista";
+                    $author = $_SESSION['UserName']; 
                     
                     //variable to hold update query
                     $sql = "";
@@ -204,7 +204,7 @@
         
         // get comments corresponding to a post 
         public function getPostComments($id){
-            $sql = "SELECT * FROM comments WHERE post_id='{$id}' AND status ='ON' ";
+            $sql = "SELECT * FROM comments WHERE post_id='{$id}' AND status ='OFF' ";
             $results = $this->db->conn->query($sql);
             $resultsArray = array();
 
@@ -223,7 +223,7 @@
                 {
 
                     $title = $this->db->mysqli->real_escape_string($_POST['title']);
-                    $author = $this->db->mysqli->real_escape_string('jeevista');
+                    $author = $_SESSION['UserName'];
                     $sql = "INSERT INTO category (title,author) VALUES ('$title','$author')";
 
                     if($this->db->conn->query($sql) === TRUE){

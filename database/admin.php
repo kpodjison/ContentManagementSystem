@@ -33,7 +33,7 @@
                         $_SESSION['ErrorMsg'] = "Sorry Admin username exists. Try a new name!!";
                     }
                     else if($this->db->conn->query($sql) === TRUE){
-                        $_SESSION['SuccessMsg'] = "Admin Created Successfully!";
+                        $_SESSION['SuccessMsg'] = "Admin {$user_name} Created Successfully!";
                     }                    
                 }else
                 {
@@ -60,7 +60,7 @@
                         $_SESSION['UserName']  = $item['username'];
                         $_SESSION['AdminName']  = $item['a_name'];
                         $_SESSION['SuccessMsg']  = "Welcome ".$_SESSION['UserName']."!";
-                        // header('Location:../admin/index.php');
+                        header('Location:../admin/dashboard.php');
                     }
                     else
                     {
