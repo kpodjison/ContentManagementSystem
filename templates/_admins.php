@@ -1,4 +1,7 @@
 <?php
+    $admin->confirmLogin();
+?>
+<?php
     // Handling creation of Admin 
     if(isset($_POST['add_admin'])){
         $password = $_POST['Password'];

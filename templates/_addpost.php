@@ -1,4 +1,7 @@
 <?php
+    $admin->confirmLogin();
+?>
+<?php
 
     if(isset($_POST['add_post'])){
         if(!empty($_POST['postTitle']))

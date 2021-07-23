@@ -1,4 +1,7 @@
 <?php
+    $admin->confirmLogin();
+?>
+<?php
     /* check if session exist for successfully editing a post
      and display a success message.*/
         function EditSuccessMsg()

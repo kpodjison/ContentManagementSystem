@@ -11,5 +11,16 @@
            
         </div>
 
+      
+
 </section>
+<div class="container bg-warning">
+<?php
+
+echo $_SESSION['UserId']. "<br>";
+echo $_SESSION['UserName']. "<br>" ;
+echo $_SESSION['AdminName']. "<br>";
+
+?>
+</div>
    

@@ -74,6 +74,18 @@
             }
         }
 
+        public function confirmLogin()
+        {
+            if(isset($_SESSION['UserId']))
+            {
+                return TRUE;
+            }
+            else{
+                $_SESSION['ErrorMsg'] = "Login Required!!";
+                header('Location:../admin/login.php');
+            }
+        }
+
         
     }
 

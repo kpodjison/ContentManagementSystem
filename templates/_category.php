@@ -1,5 +1,8 @@
 <?php
+    $admin->confirmLogin();
+?>
 
+<?php
     if(isset($_POST['add_cat'])){
         if(!empty($_POST['title']))
         {
