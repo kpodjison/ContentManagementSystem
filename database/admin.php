@@ -42,6 +42,38 @@
             }
         }
 
+        public function adminLogin()
+        {
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                if(isset($_POST['admin_login']))
+                {
+                    $user_name = $this->db->mysqli->real_escape_string($_POST['Username']);
+                    $password = $this->db->mysqli->real_escape_string($_POST['Password']);
+
+                    $sql = "SELECT * FROM admins WHERE username='$user_name' AND password='$password' ";
+                    $results = $this->db->conn->query($sql);
+                    if($item = mysqli_fetch_assoc($results))
+                    {
+
+                        $_SESSION['UserId']  = $item['id'];
+                        $_SESSION['UserName']  = $item['username'];
+                        $_SESSION['AdminName']  = $item['a_name'];
+                        $_SESSION['SuccessMsg']  = "Welcome ".$_SESSION['UserName']."!";
+                        // header('Location:../admin/index.php');
+                    }
+                    else
+                    {
+                        $_SESSION['ErrorMsg']  = "Incorrect Username or Password!!";
+                       
+
+                    }
+
+
+                }
+            }
+        }
+
         
     }
 

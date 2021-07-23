@@ -75,6 +75,9 @@
                     endforeach;
                 ?>
                 <!-- start of fetching existing comments  -->
+                <div>
+
+               
                     <?php
                         $allComments = $post->getPostComments($post_id);
                         // print_r($allComments);
@@ -99,7 +102,8 @@
                     ?>
 
 
-                        
+                      
+                </div>   
                 <!-- end of fetching existing comments  -->
 
                 <!-- start of comment  -->
