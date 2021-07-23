@@ -1,5 +1,5 @@
 <?php
-    require('../functions.php');
+    require('../admin/functions.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

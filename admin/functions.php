@@ -3,6 +3,7 @@
     // require('database/DBController.php');
     require('../database/DBController.php');
     require('../database/post.php');
+    require('../database/admin.php');
     require('../admin/session.php');
 
     // function to redirect user to a specific page
@@ -18,9 +19,12 @@
     // post object 
     $post = new Post($db);
     $allCategories = $post->getAllCategories();
-    $allPosts = $post->getAllPost();
+    $allPosts = $post->getAllPost("");
     // print_r($allPosts);
     // print_r($allCategories);
+
+    // admin objec 
+    $admin = new Admin($db);
     
 
 
