@@ -3,6 +3,7 @@
      $admin->confirmLogin();
 ?>
 <?php
+    
     // Handling creation of Admin 
     if(isset($_POST['add_admin'])){
         $password = $_POST['Password'];
@@ -27,18 +28,25 @@
                 $_SESSION['ErrorMsg'] = "Password and ConfirmPassword not matching!!"; 
             }
             else{
-                $admin->addAdmin(); 
-               
-            }
-                     
+                $admin->addAdmin();                           
+            }                   
            
         }
         else if(empty($_POST['Username'])){
             $_SESSION['ErrorMsg'] = "Please add a username!!";         
            
-        }
-       
+        }       
     }
+
+    //delete admin
+    if(isset($_GET['admid']))
+    {
+        $admin->DeleteAdmin();
+    }
+
+    //get all admins
+    $allAdmins = $admin->getAllAdmins();    
+    // print_r($allAdmins);
 
 ?>
     <!-- start of main content  -->
@@ -101,6 +109,49 @@
                 </div>
 
             </form>
+
+            <div class="col-lg-12" style="min-height:300px;">
+                <h2>Existing Admins</h2>
+                    <?php
+                        echo SuccessMsg();               
+                         echo ErrorMsg();               
+                    ?>
+                <table class="table table-responsive table-bordered table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>No.</th>
+                        <th>Date&Time</th>
+                        <th>Username</th>                        
+                        <th>Admin Name</th>
+                        <th>Added By</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php
+                            $counter = 0;
+                            foreach($allAdmins as $ad_item):
+                                $counter++;
+
+                        ?>
+                        <tr>
+                            <td><?php echo $counter; ?></td>
+                            <td><?php echo htmlentities($ad_item['date_time']); ?></td>
+                            <td><?php echo htmlentities($ad_item['username']); ?></td>
+                            <td><?php echo htmlentities($ad_item['a_name']); ?></td>
+                            <td><?php echo htmlentities($ad_item['added_by'])??"Admin"; ?></td>
+                            <td >                                  
+                                <a href="admins.php?admid=<?php echo $ad_item['id'];?>" class="m-1"> <span class="btn btn-danger">Delete</span> </a>                              
+                            </td>
+                           
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
+                
+            </div>
+
 
         </div>
     </div>

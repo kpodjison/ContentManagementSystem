@@ -88,6 +88,48 @@
             }
         }
 
+         //get all admins function
+         public function getAllAdmins()
+         {                     
+         
+                  $sql = "SELECT * FROM admins";
+                  $results = $this->db->conn->query($sql);
+                  $resultsArray = array();
+            
+                 while($item = mysqli_fetch_assoc($results))
+                 {
+                     $resultsArray[] = $item;
+                 }            
+            
+                 //final results returned
+             return $resultsArray;
+         }
+
+         //delete admin function 
+           //delete comment 
+           public function DeleteAdmin(){
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                if(isset($_GET['admid']))
+                {
+                    $adm_id = $_GET['admid'];
+                    $sql = "DELETE FROM admins WHERE id='$adm_id' ";
+                    $results = $this->db->conn->query($sql);
+                    if($results == TRUE)
+                    {
+                        $_SESSION["SuccessMsg"] = "Admin Deleted successfully!";
+                        
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Something Went Wrong. Please Try Again!!";
+                    }
+                
+                }
+            }              
+        }
+ 
+
         
     }
 
