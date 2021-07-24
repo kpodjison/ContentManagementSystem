@@ -29,6 +29,14 @@
         }
        
     }
+    if(isset($_GET['catid'])){
+        $post->DeleteCategory();
+
+    }
+
+
+    //array to hold all existing categories
+    $all_categories = $post->getAllCategories();
 
 ?>
     <!-- start of main content  -->
@@ -78,7 +86,49 @@
 
             </form>
 
+            <div class="col-lg-12" style="min-height:300px;">
+                <h2>Existing Categories</h2>
+                    <?php
+                        echo ApSuccessMsg();               
+                         echo ErrorMsg();               
+                    ?>
+                <table class="table table-responsive table-bordered table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>No.</th>
+                        <th>Date&Time</th>
+                        <th>Category Name</th>                        
+                        <th>Creator Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <?php
+                            $counter = 0;
+                            foreach($all_categories as $cat_item):
+                                $counter++;
+
+                        ?>
+                        <tr>
+                            <td><?php echo $counter; ?></td>
+                            <td><?php echo htmlentities($cat_item['date_time']); ?></td>
+                            <td><?php echo htmlentities($cat_item['title']); ?></td>
+                            <td><?php echo htmlentities($cat_item['author'])??"Admin"; ?></td>
+                            <td >                                  
+                                <a href="category.php?catid=<?php echo $cat_item['id'];?>" class="m-1"> <span class="btn btn-danger">Delete</span> </a>                              
+                            </td>
+                           
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
+                
+            </div>
+
         </div>
     </div>
+    
 </section>
+
    

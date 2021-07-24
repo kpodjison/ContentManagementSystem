@@ -284,6 +284,7 @@
                 }
             }              
         }
+        //delete comment 
         public function DeleteComment(){
             if($_SERVER['REQUEST_METHOD'] === 'GET')
             {
@@ -343,6 +344,30 @@
            
                 //final results returned
             return $resultsArray;
+        }
+
+
+          //delete comment 
+          public function DeleteCategory(){
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                if(isset($_GET['catid']))
+                {
+                    $cat_id = $_GET['catid'];
+                    $sql = "DELETE FROM category WHERE id='$cat_id' ";
+                    $results = $this->db->conn->query($sql);
+                    if($results == TRUE)
+                    {
+                        $_SESSION["SuccessMsg"] = "Category Deleted successfully!";
+                        
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Something Went Wrong. Please Try Again!!";
+                    }
+                
+                }
+            }              
         }
 
     }

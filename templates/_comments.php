@@ -56,8 +56,8 @@
                          echo ErrorMsg();               
                     ?>
                 <table class="table table-striped table-hover table-responsive table-bordered">
-                    <thead class="table-dark"></thead>
-                    <tr>
+                    <thead class="table-dark">
+                         <tr>
                         <th>No.</th>
                         <th>Name</th>
                         <th>Date&Time</th>
@@ -65,6 +65,8 @@
                         <th>Action</th>
                         <th>Details</th>
                     </tr>
+                    </thead>
+                   
                     <tbody>
                         <?php
                             $counter = 0;
@@ -83,7 +85,7 @@
                                     <a href="comments.php?dcid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-danger">Delete</span> </a>
                                 </div>
                             </td>
-                            <td>
+                            <td style="min-width:130px;">
                                 <a href="../fullpost.php?id=<?php echo $cmt_item['post_id'];?>" target=_blank> <span class="btn btn-primary">Live Preview</span>  </a>
                             </td>
                         </tr>
@@ -99,8 +101,8 @@
                          echo ErrorMsg();               
                     ?>
                 <table class="table table-striped table-hover table-responsive table-bordered">
-                    <thead class="table-dark"></thead>
-                    <tr>
+                    <thead class="table-dark">
+                         <tr>
                         <th>No.</th>
                         <th>Name</th>
                         <th>Date&Time</th>
@@ -108,6 +110,8 @@
                         <th>Action</th>
                         <th>Details</th>
                     </tr>
+                    </thead>
+                   
                     <tbody>
                         <?php
                             $counter = 0;
@@ -120,13 +124,13 @@
                             <td><?php echo htmlentities($cmt_item['commenter_name']); ?></td>
                             <td><?php echo htmlentities($cmt_item['date_time']); ?></td>
                             <td><?php echo htmlentities($cmt_item['comment']); ?></td>
-                            <td>
-                                <div class="btn-group" role="group">
+                            <td >
+                                <div class="btn-group" role="group" style="min-width:210px;">
                                     <a href="comments.php?ucid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-warning">Dis-Approve</span> </a>
                                     <a href="comments.php?dcid=<?php echo $cmt_item['id'];?>" class="m-1"> <span class="btn btn-danger">Delete</span> </a>
                                 </div>
                             </td>
-                            <td>
+                            <td style="min-width:130px;">
                                 <a href="../fullpost.php?id=<?php echo $cmt_item['post_id'];?>" target=_blank> <span class="btn btn-primary">Live Preview</span>  </a>
                             </td>
                         </tr>
