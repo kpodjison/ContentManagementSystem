@@ -204,7 +204,7 @@
         
         // get comments corresponding to a post 
         public function getPostComments($id){
-            $sql = "SELECT * FROM comments WHERE post_id='{$id}' AND status ='OFF' ";
+            $sql = "SELECT * FROM comments WHERE post_id='{$id}' AND status ='ON' ";
             $results = $this->db->conn->query($sql);
             $resultsArray = array();
 
@@ -213,6 +213,97 @@
                 $resultsArray[] = $item;
             }
             return $resultsArray;
+        }
+        // get approveed comments 
+        public function getApprovedComments(){
+            $sql = "SELECT * FROM comments WHERE  status ='ON' ";
+            $results = $this->db->conn->query($sql);
+            $resultsArray = array();
+
+            while($item = mysqli_fetch_assoc($results))
+            {
+                $resultsArray[] = $item;
+            }
+            return $resultsArray;
+        }
+        // get un-approveed comments 
+        public function getUnApprovedComments(){
+            $sql = "SELECT * FROM comments WHERE  status ='OFF' ";
+            $results = $this->db->conn->query($sql);
+            $resultsArray = array();
+
+            while($item = mysqli_fetch_assoc($results))
+            {
+                $resultsArray[] = $item;
+            }
+            return $resultsArray;
+        }
+        // approve comments 
+        public function ApproveComment(){
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                if(isset($_GET['cid']))
+                {
+                    $comment_id = $_GET['cid'];
+                    $admin = $_SESSION['UserName'];
+                    $sql = "UPDATE comments SET status = 'ON', approved_by= '$admin' WHERE id='$comment_id' ";
+                    $results = $this->db->conn->query($sql);
+                    if($results == TRUE)
+                    {
+                        $_SESSION["SuccessMsg"] = "Comment Approved successfully!";
+                        
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Something Went Wrong. Please Try Again!!";
+                    }
+                
+                }
+            }              
+        }
+        // un-approve comments 
+        public function DisApproveComment(){
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                if(isset($_GET['ucid']))
+                {
+                    $comment_id = $_GET['ucid'];
+                    $admin = $_SESSION['UserName'];
+                    $sql = "UPDATE comments SET status = 'OFF', approved_by= '$admin' WHERE id='$comment_id' ";
+                    $results = $this->db->conn->query($sql);
+                    if($results == TRUE)
+                    {
+                        $_SESSION["SuccessMsg"] = "Comment Disapproved successfully!";
+                        
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Something Went Wrong. Please Try Again!!";
+                    }
+                
+                }
+            }              
+        }
+        public function DeleteComment(){
+            if($_SERVER['REQUEST_METHOD'] === 'GET')
+            {
+                if(isset($_GET['dcid']))
+                {
+                    $comment_id = $_GET['dcid'];
+                    $sql = "DELETE FROM comments WHERE id='$comment_id' ";
+                    $results = $this->db->conn->query($sql);
+                    if($results == TRUE)
+                    {
+                        $_SESSION["SuccessMsg"] = "Comment Deleted successfully!";
+                        
+                    }
+                    else
+                    {
+                        $_SESSION["ErrorMsg"] = "Something Went Wrong. Please Try Again!!";
+                    }
+                
+                }
+            }              
         }
 
         // add category function 

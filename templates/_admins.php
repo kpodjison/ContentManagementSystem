@@ -1,6 +1,6 @@
 <?php
      $_SESSION['UrlTracker'] = $_SERVER['PHP_SELF'];
-    $admin->confirmLogin();
+     $admin->confirmLogin();
 ?>
 <?php
     // Handling creation of Admin 
@@ -55,7 +55,7 @@
 
     </section>
 
-<section class="container py-2 mb-4 " style="min-height:622px;">
+<section class="container py-2 mb-4 " style="min-height:400px;">
     <div class="row">
         <div class="offset-lg-1 col-lg-10" >
             <?php

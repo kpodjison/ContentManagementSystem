@@ -16,6 +16,21 @@
             }
 
     }     
+    // success message for unexisting approved comments
+    function ApSuccessMsg()
+    {
+            if(isset($_SESSION["ApSuccessMsg"] ))
+            {
+                $status = '<div class="alert alert-success">'
+                            .htmlentities($_SESSION["ApSuccessMsg"]).
+                            '</div>';
+
+                            //make this session null after using it
+                            $_SESSION["ApSuccessMsg"]  = null;
+                            return $status;
+            }
+
+    }     
  
     //error
     function ErrorMsg()

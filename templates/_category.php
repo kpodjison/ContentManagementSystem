@@ -45,7 +45,7 @@
 
     </section>
 
-<section class="container py-2 mb-4 " style="min-height:622px;">
+<section class="container py-2 mb-4 " style="min-height:410px;">
     <div class="row">
         <div class="offset-lg-1 col-lg-10" >
             <?php
