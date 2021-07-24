@@ -117,6 +117,8 @@
             2.  It returns post based on search keywords( thus when called with a string parameter from 
                 searched keyword.)
         */
+        
+
         public function getAllPost($searched_key_word)
         {
             //Variable to hold all results 
@@ -157,6 +159,21 @@
                     
                     }
                 }
+
+            return $resultsArray;
+        }
+        //function to get latest post taking a parameter corresponding to the number of posts to be fetched
+        public function getLatestPost($limit)
+        {
+                    $resultsArray = array();
+                    $sql = "SELECT * FROM post ORDER BY id DESC LIMIT 0,{$limit}";
+                    $results = $this->db->conn->query($sql);
+
+                    while($item = mysqli_fetch_assoc($results))
+                    {
+                        $resultsArray[] = $item;
+                    
+                    }
 
             return $resultsArray;
         }
@@ -203,6 +220,18 @@
         }
         
         // get comments corresponding to a post 
+        public function getAllComments(){
+            $sql = "SELECT * FROM comments";
+            $results = $this->db->conn->query($sql);
+            $resultsArray = array();
+
+            while($item = mysqli_fetch_assoc($results))
+            {
+                $resultsArray[] = $item;
+            }
+            return $resultsArray;
+        }
+        // get comments corresponding to a post 
         public function getPostComments($id){
             $sql = "SELECT * FROM comments WHERE post_id='{$id}' AND status ='ON' ";
             $results = $this->db->conn->query($sql);
@@ -215,10 +244,19 @@
             return $resultsArray;
         }
         // get approveed comments 
-        public function getApprovedComments(){
-            $sql = "SELECT * FROM comments WHERE  status ='ON' ";
-            $results = $this->db->conn->query($sql);
+        public function getApprovedComments($id){
             $resultsArray = array();
+
+            if(empty($id))
+            {
+                $sql = "SELECT * FROM comments WHERE  status ='ON' ";
+            }
+            else
+            {
+                $sql = "SELECT * FROM comments WHERE  status ='ON' AND post_id= '$id' ";
+
+            }            
+            $results = $this->db->conn->query($sql);            
 
             while($item = mysqli_fetch_assoc($results))
             {
@@ -227,10 +265,20 @@
             return $resultsArray;
         }
         // get un-approveed comments 
-        public function getUnApprovedComments(){
-            $sql = "SELECT * FROM comments WHERE  status ='OFF' ";
-            $results = $this->db->conn->query($sql);
+        public function getUnApprovedComments($id){
+
             $resultsArray = array();
+            if(empty($id)){
+
+                $sql = "SELECT * FROM comments WHERE  status ='OFF' ";
+            }
+            else
+            {
+                $sql = "SELECT * FROM comments WHERE  status ='OFF' AND  post_id='$id' ";
+
+            }
+            
+            $results = $this->db->conn->query($sql);            
 
             while($item = mysqli_fetch_assoc($results))
             {

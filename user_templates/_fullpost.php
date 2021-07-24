@@ -55,6 +55,7 @@
                 <?php
                     foreach( $singlePost as $item):
                         $post_id = $item['id'];
+                        $allApprovedComments = count($post->getApprovedComments($item['id']));
 
                 ?>
                 <div class="card mb-3">
@@ -63,7 +64,21 @@
                         <h4 class="card-title mt-1"><?php echo htmlentities($item['title']) ?></h4>
                         <div class="d-flex me-auto flex-row justify-content-between">
                             <small class="text-muted">Written By: <?php echo htmlentities($item['author']) ?> On <?php echo ($item['date_time']) ?></small>
-                            <small class="badge bg-secondary p-1"> <span>Comments 20</span> </small>
+                            <?php 
+                                    if($allApprovedComments > 0)
+                                    {
+                                   
+                                        if($allApprovedComments > 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comments '.$allApprovedComments.'</span></small>';
+                                
+                                        } 
+                                        if($allApprovedComments == 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comment '.$allApprovedComments.'</span></small>';
+                                        }
+                                    }
+                                ?>
                         </div>
                         <hr>
                         <p class="card-text"><?php echo $item['post_desc'];  ?></p>

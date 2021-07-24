@@ -20,9 +20,9 @@
       /* ---end of approved comment operations--- */
 
     //array to hold all approved comments 
-    $approved_cmts = $post->getApprovedComments();
+    $approved_cmts = $post->getApprovedComments("");
     //array to hold all unapproved comments 
-    $un_approved_cmts = $post->getUnApprovedComments();
+    $un_approved_cmts = $post->getUnApprovedComments("");
     
     //message to show there is not existing un-approved comment
     if(empty($un_approved_cmts))

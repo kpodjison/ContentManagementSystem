@@ -8,13 +8,14 @@
     <div class="container mb-4">
         <div class="row mt-4">
             <div class="col-sm-8">
-                <h1>The Complete Responsive CMS Blog</h1>
+                <h1>Jeevista CMS Blog</h1>
                 <h1 class="lead">By Jeevista.</h1>
                 <?php
                     echo PostErrorMsg();
                 ?>
                 <?php
                     foreach($allPosts as $item):
+                        $allApprovedComments = count($post->getApprovedComments($item['id']));
 
                 ?>
                 <div class="card">
@@ -23,7 +24,25 @@
                         <h4 class="card-title mt-1"><?php echo htmlentities($item['title']) ?></h4>
                         <div class="d-flex me-auto flex-row justify-content-between">
                         <small class="text-muted">Written By: <?php echo htmlentities($item['author']) ?> On <?php echo ($item['date_time']) ?></small>
-                        <small class="badge bg-secondary p-1"> <span>Comments 20</span> </small>
+                        
+                            
+                                <?php 
+                                    if($allApprovedComments > 0)
+                                    {
+                                   
+                                        if($allApprovedComments > 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comments '.$allApprovedComments.'</span></small>';
+                                
+                                        } 
+                                        if($allApprovedComments == 1)
+                                        {
+                                            echo '<small class="badge bg-secondary p-1"><span>Comment '.$allApprovedComments.'</span></small>';
+                                        }
+                                    }
+                                ?>
+                            
+                        
 
                         </div>
                         <hr>

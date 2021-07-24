@@ -102,6 +102,10 @@
                                  $counter = 0;
                                 foreach($allPosts as  $item ):
                                     $counter++;
+                                    //declay array to hold approved comments
+                                    $allApprovedComments = count($post->getApprovedComments($item['id']));
+                                   //declay array to hold unapproved comments
+                                   $allUnApprovedComments = count($post->getUnApprovedComments($item['id']));
                              ?>
                         <tr>                            
 
@@ -111,7 +115,19 @@
                              <td><?php echo $item['date_time']?>  </td>
                              <td><?php echo $item['author']?>  </td>
                              <td><img src="../assets/uploads/<?php echo $item['post_img']?>" alt="post-image" width="140px;" height="80px;"></td>
-                             <td>comment </td>
+                             <td>
+                             <?php
+                                            if($allApprovedComments > 0)
+                                            {
+                                              echo '<span class="badge bg-success mx-2 p-2 fs-5 my-1">'.$allApprovedComments.'</span>';
+                                            }
+                                            if($allUnApprovedComments > 0)
+                                            {
+                                              echo '<span class="badge bg-danger mx-2 p-2 fs-5 my-1">'.$allUnApprovedComments.'</span>';
+                                            }
+
+                                          ?>
+                             </td>
                              <td>
                                     <div class="btn-group" role="group">
 

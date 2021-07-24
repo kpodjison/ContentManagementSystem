@@ -25,7 +25,7 @@
     <div style="height:10px; background:yellow;"></div>
         <nav class="navbar navbar-expand-lg font-raleway navbar-dark bg-dark">
             <div class="container py-0 my-0 ">
-                <a href="index.php" class="navbar-brand">Jeevista.com</a>
+                <a href="dashboard.php" class="navbar-brand">Jeevista.com</a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#vista-navbar-collapse" aria-controls="vista-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
