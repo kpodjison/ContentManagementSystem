@@ -148,9 +148,9 @@
                     }              
 
                 }
-            } 
+            }
             else{
-                    $sql = "SELECT * FROM post ORDER BY id DESC";
+                    $sql = "SELECT * FROM post ORDER BY id DESC LIMIT 0,5";
                     $results = $this->db->conn->query($sql);
 
                     while($item = mysqli_fetch_assoc($results))
@@ -158,10 +158,55 @@
                         $resultsArray[] = $item;
                     
                     }
-                }
-
+                }        
+    
             return $resultsArray;
         }
+
+        public function getPaginationPost()
+        {
+            //Variable to hold all results 
+            $resultsArray = array();
+
+           if(isset($_GET['page']))
+            {
+                $page = $_GET['page'];
+                if($page == 0 || $page < 0){
+                    $showPostFrom = 0;
+                }
+                else{
+                    $showPostFrom = ($page*5)-5;
+                }
+                
+                $sql = "SELECT * FROM post ORDER BY id DESC LIMIT $showPostFrom,5";
+                $results = $this->db->conn->query($sql);
+                while($item = mysqli_fetch_assoc($results))
+                {
+                    $resultsArray[] = $item;                
+                 }
+            }        
+    
+            return $resultsArray;
+        }
+
+
+        public function getPostTotal(){
+            
+
+                $sql = "SELECT * FROM post ORDER BY id DESC";
+                $results = $this->db->conn->query($sql);
+                $resultsArray =array();
+
+                while($item = mysqli_fetch_assoc($results))
+                {
+                    $resultsArray[] = $item;                
+                }
+
+                return count($resultsArray);
+             
+        }
+
+
         //function to get latest post taking a parameter corresponding to the number of posts to be fetched
         public function getLatestPost($limit)
         {
