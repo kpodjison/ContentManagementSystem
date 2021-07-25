@@ -42,6 +42,40 @@
             }
         }
 
+        //function to edit admin profile
+        public function EditAdminProfile(){
+            
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                if(isset($_POST['edit_admin'])){
+
+                    $admin_name = $this->db->mysqli->real_escape_string($_POST['admin_name']);
+                    $headline = $this->db->mysqli->real_escape_string($_POST['headline']);
+                    $bio = $this->db->mysqli->real_escape_string($_POST['admin_bio']);
+                    $img= $this->db->mysqli->real_escape_string($_FILES['image']['name']);
+                    $ImgTargetDir  = "../assets/admins/".basename($_FILES['image']['name']);
+                    $admin_id =  $_SESSION['UserId'];
+
+                     /*if post image is not changed use default image else use new image selected */
+                     if(empty($img)){
+                        $sql = "UPDATE admins SET a_name='$admin_name',headline='$headline',admin_bio='$bio' WHERE id='$admin_id' ";
+                    }
+                    else
+                    {
+                        $sql = "UPDATE admins SET a_name='$admin_name',headline='$headline',admin_img='$img',admin_bio='$bio' WHERE id='$admin_id' ";
+                    }
+                     
+                   if($this->db->conn->query($sql) === TRUE){
+                        $_SESSION['SuccessMsg'] = "Admin {$admin_name}'s Profile Updated Successfully!";
+                        move_uploaded_file($_FILES['image']['tmp_name'],$ImgTargetDir);
+                    }                    
+                }else
+                {
+                    $_SESSION['ErrorMsg'] = "Failed to Update Admin Profile!!";
+                }
+            }
+        }
+
         public function adminLogin()
         {
             if($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -93,6 +127,22 @@
          {                     
          
                   $sql = "SELECT * FROM admins";
+                  $results = $this->db->conn->query($sql);
+                  $resultsArray = array();
+            
+                 while($item = mysqli_fetch_assoc($results))
+                 {
+                     $resultsArray[] = $item;
+                 }            
+            
+                 //final results returned
+             return $resultsArray;
+         }
+         //get single admin function
+         public function getSingleAdmin($id)
+         {                     
+         
+                  $sql = "SELECT * FROM admins WHERE id='$id' ";
                   $results = $this->db->conn->query($sql);
                   $resultsArray = array();
             
