@@ -140,16 +140,30 @@
          }
          //get single admin function
          public function getSingleAdmin($id)
-         {                     
-         
-                  $sql = "SELECT * FROM admins WHERE id='$id' ";
-                  $results = $this->db->conn->query($sql);
-                  $resultsArray = array();
+         {  
+             $resultsArray = array();                   
+            if(is_numeric($id))
+            {
+                 $sql = "SELECT * FROM admins WHERE id='$id' ";
+                  $results = $this->db->conn->query($sql);                 
             
                  while($item = mysqli_fetch_assoc($results))
                  {
                      $resultsArray[] = $item;
-                 }            
+                 } 
+            }
+            else
+            { 
+                $sql = "SELECT * FROM admins WHERE username='$id' ";
+                $results = $this->db->conn->query($sql);                 
+          
+               while($item = mysqli_fetch_assoc($results))
+               {
+                   $resultsArray[] = $item;
+               } 
+
+            }
+                            
             
                  //final results returned
              return $resultsArray;

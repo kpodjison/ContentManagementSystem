@@ -53,7 +53,7 @@
                         <img src="assets/uploads/<?php echo htmlentities($item['post_img']) ?>" alt="post image" class="card-img-top img-responsive" style="max-height:450px;">
                         <h4 class="card-title mt-1"><?php echo htmlentities($item['title']) ?></h4>
                         <div class="d-flex me-auto flex-row justify-content-between">
-                        <small class="text-muted">Written By: <?php echo htmlentities($item['author']) ?> On <?php echo ($item['date_time']) ?>
+                        <small class="text-muted">Written By: <a href="profile.php?username=<?php echo htmlentities($item['author'])?>"><?php echo htmlentities($item['author']) ?> </a> On <?php echo ($item['date_time']) ?>
                              <span class="fw-bold"><?php echo ($item['category']) ?> </span>
                         </small>
                         

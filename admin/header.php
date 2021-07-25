@@ -52,7 +52,7 @@
                             <a href="comments.php" class="nav-link">Comments</a> 
                         </li>
                         <li class="nav-item">
-                            <a href="vlog.php?page=1" class="nav-link">Live bog</a>
+                            <a href="../index.php?page=1" target="_blank" class="nav-link">Live bog</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">

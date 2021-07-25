@@ -10,7 +10,7 @@
     //editing admin profile
     if(isset($_POST['edit_admin']))
     {
-        if( strlen($_POST['headline']) > 15){
+        if( strlen($_POST['headline']) > 25){
             $_SESSION['ErrorMsg'] = "Headline should be less than 15 characters!!";
         }
         else if( strlen($_POST['admin_bio']) > 500){
