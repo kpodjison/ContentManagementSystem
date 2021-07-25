@@ -3,11 +3,35 @@
     if(isset($_GET['search_btn']))
     {
         $allPosts = $post->getAllPost(htmlentities($_GET['Search']));
+        /**check if the searched keyword results in an empty array
+         * (thus does not exist). If yes display default post items and 
+         * echo an error message to tell user the keyword does not exist.
+         */
+        if(empty( $allPosts))
+        {
+            
+            $allPosts = $post->getAllPost("");
+            $_SESSION['ErrorMsg'] = "Sorry there is no post correspoding
+            to your search. Browse available posts.";
+        }
+    }
+   //fetching all post corresponding to category type
+    if(isset($_GET['category']))
+    {
+        $allPosts = $post->getAllPost(htmlentities($_GET['category']));
     }
     //fetching all post from pagination link
     if(isset($_GET['page']))
-    {
-        $allPosts = $post-> getPaginationPost();
+    {   
+        if(is_numeric($_GET['page']))
+        {
+            $allPosts = $post-> getPaginationPost();
+        }else
+        {
+            $_GET['page'] = 1;
+            $allPosts = $post-> getPaginationPost();
+        }
+        
     }
 
 ?>
@@ -17,7 +41,7 @@
                 <h1>Jeevista CMS Blog</h1>
                 <h1 class="lead">By Jeevista.</h1>
                 <?php
-                    echo PostErrorMsg();
+                    echo ErrorMsg();
                 ?>
                 <?php
                     foreach($allPosts as $item):
@@ -145,8 +169,79 @@
                 <!-- end of pagination  -->
  
             </div>
-            <div class="col-sm-4 bg-danger " >
+
+            <!-- start of side area  -->
+            <div class="col-sm-4" >
+                <div class="card mt-4">
+                    <div class="card-body p-0">
+                        <img src="assets/uploads/bg-06.jpg" class="card-img-top img-responsive p-0" style="max-height:400px;">
+                        <div class="text-center">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                Nostrum aut amet quasi?</p>
+                        </div>
+                    </div>                   
+                </div>
+                <br>
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white">
+                        <h2 class="lead">Sign Up</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-group d-flex flex-row me-auto mb-3">
+                            <button class="btn btn-success text-center text-white me-2">Join Now</button>
+                            <button class="btn btn-danger text-center text-white">Login Now</button>
+                        </div>
+                        <div class="input-group mb-3" role="group">
+                            <input type="email" name="email_submit" class="form-control">                            
+                            <button type="submit" name="submit_email" class="btn btn-primary text-white text-center">Subscribe</button>
+                          
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="lead">Categories</h2>
+                    </div>                   
+                    <div class="card-body">
+                      
+                            <?php
+                                foreach($allCategories as $category):
+                                    
+                            ?>
+                                <a href="index.php?category=<?php echo $category["title"];?>" class="categorylinks"><?php echo $category["title"];?> </a><br>
+                            <?php
+                                endforeach;
+                            ?>                       
+                        
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h2 class="lead">Latest Post</h2>
+                    </div>
+                    <div class="card-body">
+                        <?php 
+                            $latestPost = $post->getAllPost("");
+                            foreach($latestPost as $latest):
+                        ?>
+                        <div class="media d-flex flex-row mb-2">
+                            <img src="assets/uploads/<?php echo htmlentities($latest['post_img'] ) ?>" alt="post-img" width="84px" height="84px" classs="img-fluid d-block align-self-start">
+                            <div class="media-body ms-2">
+                               <a href="fullpost.php?id=<?php echo htmlentities($latest['id']); ?>"><h6 class="text-dark"><?php echo $latest['title']; ?></h6></a> 
+                                <small class="text-muted"><?php echo htmlentities($latest['date_time']); ?></small>
+                            </div>
+                        </div>
+                        <hr>
+
+
+                        <?php  endforeach; ?>
+                    </div>
+                </div>
             </div>
+
+            <!-- end of side area  -->
         </div>
     </div>
 

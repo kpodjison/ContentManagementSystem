@@ -146,6 +146,23 @@
                 
                         }                        
                     }              
+                    if(isset($_GET['category']))
+                    {
+                        $search = $this->db->mysqli->real_escape_string($_GET['category']);                    
+                        
+                        $sql = "SELECT * FROM post WHERE date_time LIKE '%$search%' 
+                        OR title LIKE '%$search%' 
+                        OR category LIKE '%$search%' 
+                        OR  post_desc LIKE '%$search%' 
+                        ";
+                        $results = $this->db->conn->query($sql);
+                
+                        while($item = mysqli_fetch_assoc($results))
+                        {
+                            $resultsArray[] = $item;
+                
+                        }                        
+                    }              
 
                 }
             }
@@ -193,7 +210,7 @@
         public function getPostTotal(){
             
 
-                $sql = "SELECT * FROM post ORDER BY id DESC";
+                $sql = "SELECT * FROM post ORDER BY id DESC ";
                 $results = $this->db->conn->query($sql);
                 $resultsArray =array();
 

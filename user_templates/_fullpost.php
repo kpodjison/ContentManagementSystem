@@ -101,14 +101,12 @@
                         
                         foreach($allComments as $comment ):
                     ?>
-                    <div class="media mb-2 bg-dark text-white p-1" >
-                        <img src="./assets/user2.png" alt="User-img" width="64px" height="64px" class="align-self-start me-2">
-                        <div class="media-body">
-                            <div class="d-flex me-auto flex-row justify-content-between mt-0 ">                            
-                                <h6 class="lead"><?php echo $comment['commenter_name'] ?></h6>
-                                <p class="small"><?php  echo $comment['date_time'] ?></p>
-                            </div>
-                            <p><?php echo $comment['comment'] ?></p>
+                    <div class="media d-flex flex-row mb-2 bg-dark text-white p-1" >
+                        <img src="./assets/user2.png" alt="User-img" width="64px" height="64px" class="align-self-start me-2 img-fluid">
+                        <div class="media-body">                                                      
+                                <h6 class="lead mb-0"><?php echo $comment['commenter_name'] ?></h6>
+                                <small class=""><?php  echo $comment['date_time'] ?></small>                            
+                                <p><?php echo $comment['comment'] ?></p>
                         </div>
 
                     </div>
@@ -161,8 +159,80 @@
  
             </div>
 
-            <div class="col-sm-4 bg-danger " >
+              <!-- start of side area  -->
+              <div class="col-sm-4" >
+                <div class="card mt-4">
+                    <div class="card-body p-0">
+                        <img src="assets/uploads/bg-06.jpg" class="card-img-top img-responsive p-0" style="max-height:400px;">
+                        <div class="text-center">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                Nostrum aut amet quasi?</p>
+                        </div>
+                    </div>                   
+                </div>
+                <br>
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white">
+                        <h2 class="lead">Sign Up</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-group d-flex flex-row me-auto mb-3">
+                            <button class="btn btn-success text-center text-white me-2">Join Now</button>
+                            <button class="btn btn-danger text-center text-white">Login Now</button>
+                        </div>
+                        <div class="input-group mb-3" role="group">
+                            <input type="email" name="email_submit" class="form-control">                            
+                            <button type="submit" name="submit_email" class="btn btn-primary text-white text-center">Subscribe</button>
+                          
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="lead">Categories</h2>
+                    </div>                   
+                    <div class="card-body">
+                      
+                            <?php
+                                foreach($allCategories as $category):
+                                    
+                            ?>
+                                <a href="index.php?category=<?php echo $category["title"];?>" class="categorylinks"><?php echo $category["title"];?> </a><br>
+                            <?php
+                                endforeach;
+                            ?>                       
+                        
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h2 class="lead">Latest Post</h2>
+                    </div>
+                    <div class="card-body">
+                        <?php 
+                            $latestPost = $post->getAllPost("");
+                            foreach($latestPost as $latest):
+                        ?>
+                        <div class="media d-flex flex-row mb-2">
+                            <img src="assets/uploads/<?php echo htmlentities($latest['post_img'] ) ?>" alt="post-img" width="84px" height="84px" classs="img-fluid d-block align-self-start">
+                            <div class="media-body ms-2">
+                               <a href="fullpost.php?id=<?php echo htmlentities($latest['id']); ?>"><h6 class="text-dark"><?php echo $latest['title']; ?></h6></a> 
+                                <small class="text-muted"><?php echo htmlentities($latest['date_time']); ?></small>
+                            </div>
+                        </div>
+                        <hr>
+
+
+                        <?php  endforeach; ?>
+                    </div>
+                </div>
             </div>
+
+            <!-- end of side area  -->
+
+           
         </div>
     </div>
 

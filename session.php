@@ -9,7 +9,6 @@
             {
                 $status = '<div class="alert alert-success">'
                             .htmlentities($_SESSION["SuccessMsg"]).
-                            htmlentities($_SESSION["RedirectTo"]).
                             '</div>';
 
                 //make this session null after using it
